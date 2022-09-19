@@ -73,9 +73,9 @@ agg3=complete.groupby('region_name')['annual_maintenance_cost'].mean()
 #print(annual_maintenance_cost)
 
 #merge dataframes on region_name
-mergeddf=pd.merge(agg1,agg2, on='region_name')
-mergeddf2=pd.merge(mergeddf,agg3, on='region_name')
+merged_df=pd.merge(agg1,agg2, on='region_name')
+merged_df2=pd.merge(merged_df,agg3, on='region_name')
 
 #write dataframe to csv
-mergeddf2.to_csv(filepath)
+merged_df2.to_csv(filepath)
 
