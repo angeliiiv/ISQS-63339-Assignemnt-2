@@ -52,3 +52,9 @@ complete['Efficiency'] = 'low'
 
 complete['Efficiency'][(complete['annual_maintenance_cost'] > 1) & (complete['kilowatt_production'] < 3)] = 'high'
 
+#category for VendorQuality
+complete['VendorQuality'] = 'Bad'
+complete['VendorQuality'][(complete['hasroads'] == 'Yes') & (complete['haseasement']== 'Yes') & 
+                          (complete['AreaOfExpertise']== 'High Capacity')] = 'Good'
+complete['VendorQuality'][(complete['hasroads'] == 'Yes') & (complete['haseasement']== 'Yes') & 
+                          (complete['AreaOfExpertise']== 'High Efficiency')] = 'Good'
