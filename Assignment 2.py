@@ -63,18 +63,18 @@ complete['VendorQuality'][(complete['hasroads'] == 'Yes') & (complete['haseaseme
 filepath='C:\\users\\eddie\Desktop\\region_aggregate.csv'
 
 #calculate average_revenue_per_kw by region
-df1=complete.groupby('region_name')['revenue_per_kilowatt'].mean()
+agg1=complete.groupby('region_name')['revenue_per_kilowatt'].mean()
 
 #calculate annual_operation_hours by region
-df2=complete.groupby('region_name')['annual_operation_hours'].mean()
+agg2=complete.groupby('region_name')['annual_operation_hours'].mean()
 
 #calculaate annual_maintenance_cost by region
-df3=complete.groupby('region_name')['annual_maintenance_cost'].mean()
+agg3=complete.groupby('region_name')['annual_maintenance_cost'].mean()
 #print(annual_maintenance_cost)
 
 #merge dataframes on region_name
-mergeddf=pd.merge(df1,df2, on='region_name')
-mergeddf2=pd.merge(mergeddf,df3, on='region_name')
+mergeddf=pd.merge(agg1,agg2, on='region_name')
+mergeddf2=pd.merge(mergeddf,agg3, on='region_name')
 
 #write dataframe to csv
 mergeddf2.to_csv(filepath)
