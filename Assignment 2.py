@@ -46,3 +46,9 @@ complete['annual_operation_hours'] = complete['HoursPerWeekOfOperation']*52
 
 #maintenance_costs_per_year
 complete['annual_maintenance_cost'] = complete['yearlyupkeep']/complete['annual_operation_hours']
+
+#category for Efficiency
+complete['Efficiency'] = 'low'
+
+complete['Efficiency'][(complete['annual_maintenance_cost'] > 1) & (complete['kilowatt_production'] < 3)] = 'high'
+
