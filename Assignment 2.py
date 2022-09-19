@@ -70,7 +70,7 @@ agg2=complete.groupby('region_name')['annual_operation_hours'].mean()
 
 #calculaate annual_maintenance_cost by region
 agg3=complete.groupby('region_name')['annual_maintenance_cost'].mean()
-#print(annual_maintenance_cost)
+
 
 #merge dataframes on region_name
 merged_df=pd.merge(agg1,agg2, on='region_name')
