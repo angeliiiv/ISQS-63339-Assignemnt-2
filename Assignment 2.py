@@ -92,3 +92,7 @@ highefficiency_df2 = highefficiency_df[['modelcd', 'modelname', 'installcost', '
 
 #write high efficiency dataframe to csv
 highefficiency_df2.to_csv(filepath2, index=False)
+
+#adjust vendor premium based on vendor quality
+complete['new_vendor_percentage'] = complete['VendorPercent'] - .05
+complete['new_vendor_percentage'][(complete['VendorQuality'] == 'Good')] = (complete['VendorPercent'] + .05)
