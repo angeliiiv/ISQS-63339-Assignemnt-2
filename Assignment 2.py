@@ -72,14 +72,10 @@ df2=complete.groupby('region_name')['annual_operation_hours'].mean()
 df3=complete.groupby('region_name')['annual_maintenance_cost'].mean()
 #print(annual_maintenance_cost)
 
-#convert to dataframes
-df4= pd.DataFrame(df1)
-df5= pd.DataFrame(df2)
-df6= pd.DataFrame(df3)
-
 #merge dataframes on region_name
-mergeddf=pd.merge(df4,df5, on='region_name')
-mergeddf2=pd.merge(mergeddf,df6, on='region_name')
+mergeddf=pd.merge(df1,df2, on='region_name')
+mergeddf2=pd.merge(mergeddf,df3, on='region_name')
 
 #write dataframe to csv
 mergeddf2.to_csv(filepath)
+
