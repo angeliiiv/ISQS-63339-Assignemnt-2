@@ -51,6 +51,9 @@ complete['annual_maintenance_cost'] = complete['yearlyupkeep']/complete['annual_
 complete['Efficiency'] = 'low'
 
 complete['Efficiency'][(complete['annual_maintenance_cost'] > 1) & (complete['kilowatt_production'] < 3)] = 'high'
+complete['Efficiency'][(complete['annual_maintenance_cost'] < 1) & (complete['annual_maintenance_cost'] > 0.5) 
+                       & (complete['kilowatt_production'] > 3) & (complete['kilowatt_production'] < 6)] = 'high'
+complete['Efficiency'][(complete['kilowatt_production'] > 6) & (complete['kilowatt_production'] < 9)] = 'high'
 
 #category for VendorQuality
 complete['VendorQuality'] = 'Bad'
@@ -79,3 +82,13 @@ merged_df2=pd.merge(merged_df,agg3, on='region_name')
 #write dataframe to csv
 merged_df2.to_csv(filepath)
 
+
+#filepath for high efficiency model csv
+filepath2 ='C:\\Users\\Dstrawma\\OneDrive - JNJ\\MYDATA\\WFA\\TTU\\Business Intelligence\\high_efficiency_model.csv'
+
+#create high efficiency model data frame
+highefficiency_df = complete.loc[complete['Efficiency'] =='high']
+highefficiency_df2 = highefficiency_df[['modelcd', 'modelname', 'installcost', 'yearlyupkeep']]
+
+#write high efficiency dataframe to csv
+highefficiency_df2.to_csv(filepath2, index=False)
