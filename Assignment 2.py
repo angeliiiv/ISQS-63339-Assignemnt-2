@@ -58,3 +58,28 @@ complete['VendorQuality'][(complete['hasroads'] == 'Yes') & (complete['haseaseme
                           (complete['AreaOfExpertise']== 'High Capacity')] = 'Good'
 complete['VendorQuality'][(complete['hasroads'] == 'Yes') & (complete['haseasement']== 'Yes') & 
                           (complete['AreaOfExpertise']== 'High Efficiency')] = 'Good'
+
+
+filepath='C:\\users\\eddie\Desktop\\region_aggregate.csv'
+
+#calculate average_revenue_per_kw by region
+df1=complete.groupby('region_name')['revenue_per_kilowatt'].mean()
+
+#calculate annual_operation_hours by region
+df2=complete.groupby('region_name')['annual_operation_hours'].mean()
+
+#calculaate annual_maintenance_cost by region
+df3=complete.groupby('region_name')['annual_maintenance_cost'].mean()
+#print(annual_maintenance_cost)
+
+#convert to dataframes
+df4= pd.DataFrame(df1)
+df5= pd.DataFrame(df2)
+df6= pd.DataFrame(df3)
+
+#merge dataframes on region_name
+mergeddf=pd.merge(df4,df5, on='region_name')
+mergeddf2=pd.merge(mergeddf,df6, on='region_name')
+
+#write dataframe to csv
+mergeddf2.to_csv(filepath)
