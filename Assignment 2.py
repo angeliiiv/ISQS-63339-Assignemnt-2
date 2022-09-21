@@ -96,3 +96,20 @@ highefficiency_df2.to_csv(filepath2, index=False)
 #adjust vendor premium based on vendor quality
 complete['new_vendor_percentage'] = complete['VendorPercent'] - .05
 complete['new_vendor_percentage'][(complete['VendorQuality'] == 'Good')] = (complete['VendorPercent'] + .05)
+
+
+filepath3 ='C:\\Users\\Dstrawma\\OneDrive - JNJ\\MYDATA\\WFA\\TTU\\Business Intelligence\\vendor_quality.csv'
+
+#adjust vendor premium based on vendor quality
+complete['new_vendor_percentage'] = complete['VendorPercent'] - .05
+complete['new_vendor_percentage'][(complete['VendorQuality'] == 'Good')] = (complete['VendorPercent'] + .05)
+
+#calculate avg vendor percent and new vendor percent by region, Vendor and Vendor Quality
+agg4=complete.groupby(['region_name', 'Vendor', 'VendorQuality'])['VendorPercent'].mean()
+agg5=complete.groupby(['region_name', 'Vendor', 'VendorQuality'])['new_vendor_percentage'].mean()
+
+#Create vendor quality DF
+vendorquality_df = pd.merge(agg4, agg5, how='outer', on = ['region_name','Vendor','VendorQuality'])
+
+#write dataframe to csv
+vendorquality_df.to_csv(filepath3)
